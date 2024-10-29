@@ -1,4 +1,11 @@
-import { Container, Filters, Title, TopBar } from '@/components/shared';
+import {
+	Container,
+	Filters,
+	ProductCard,
+	ProductsGroupList,
+	Title,
+	TopBar,
+} from '@/components/shared';
 
 export default function Home() {
 	return (
@@ -14,7 +21,7 @@ export default function Home() {
 			<TopBar />
 
 			<Container className='mt-10 pb-14'>
-				<div className='flex gap-[60px]'>
+				<div className='flex gap-[80px]'>
 					{/* Filtration */}
 					<div className='w-[250px]'>
 						<Filters />
@@ -23,7 +30,89 @@ export default function Home() {
 					{/* List of Items */}
 					<div className='flex-1'>
 						<div className='flex flex-col gap-16'>
-							List of Items
+							<ProductsGroupList
+								title='Пиццы'
+								categoryId={1}
+								products={[
+									{
+										id: 1,
+										name: 'Чизбургер-пицца',
+										variants: [{ price: 550 }],
+										imageUrl:
+											'https://media.dodostatic.net/image/r:292x292/11EE7D61698827EE9B8DB6D0AEC53410.avif',
+									},
+									{
+										id: 1,
+										name: 'Чизбургер-пицца',
+										variants: [{ price: 550 }],
+										imageUrl:
+											'https://media.dodostatic.net/image/r:292x292/11EE7D61698827EE9B8DB6D0AEC53410.avif',
+									},
+									{
+										id: 1,
+										name: 'Чизбургер-пицца',
+										variants: [{ price: 550 }],
+										imageUrl:
+											'https://media.dodostatic.net/image/r:292x292/11EE7D61698827EE9B8DB6D0AEC53410.avif',
+									},
+									{
+										id: 1,
+										name: 'Чизбургер-пицца',
+										variants: [{ price: 550 }],
+										imageUrl:
+											'https://media.dodostatic.net/image/r:292x292/11EE7D61698827EE9B8DB6D0AEC53410.avif',
+									},
+									{
+										id: 1,
+										name: 'Чизбургер-пицца',
+										variants: [{ price: 550 }],
+										imageUrl:
+											'https://media.dodostatic.net/image/r:292x292/11EE7D61698827EE9B8DB6D0AEC53410.avif',
+									},
+								]}
+							/>
+
+							<ProductsGroupList
+								title='Завтрак'
+								categoryId={1}
+								products={[
+									{
+										id: 1,
+										name: 'Чизбургер-пицца',
+										variants: [{ price: 550 }],
+										imageUrl:
+											'https://media.dodostatic.net/image/r:292x292/11EE7D61698827EE9B8DB6D0AEC53410.avif',
+									},
+									{
+										id: 1,
+										name: 'Чизбургер-пицца',
+										variants: [{ price: 550 }],
+										imageUrl:
+											'https://media.dodostatic.net/image/r:292x292/11EE7D61698827EE9B8DB6D0AEC53410.avif',
+									},
+									{
+										id: 1,
+										name: 'Чизбургер-пицца',
+										variants: [{ price: 550 }],
+										imageUrl:
+											'https://media.dodostatic.net/image/r:292x292/11EE7D61698827EE9B8DB6D0AEC53410.avif',
+									},
+									{
+										id: 1,
+										name: 'Чизбургер-пицца',
+										variants: [{ price: 550 }],
+										imageUrl:
+											'https://media.dodostatic.net/image/r:292x292/11EE7D61698827EE9B8DB6D0AEC53410.avif',
+									},
+									{
+										id: 1,
+										name: 'Чизбургер-пицца',
+										variants: [{ price: 550 }],
+										imageUrl:
+											'https://media.dodostatic.net/image/r:292x292/11EE7D61698827EE9B8DB6D0AEC53410.avif',
+									},
+								]}
+							/>
 						</div>
 					</div>
 				</div>
