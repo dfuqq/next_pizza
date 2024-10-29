@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import { Container, Title, TopBar } from '@/components/shared';
+import { Container, Filters, Title, TopBar } from '@/components/shared';
 
 export default function Home() {
 	return (
@@ -11,7 +10,24 @@ export default function Home() {
 					className='font-extrabold'
 				/>
 			</Container>
+
 			<TopBar />
+
+			<Container className='mt-10 pb-14'>
+				<div className='flex gap-[60px]'>
+					{/* Filtration */}
+					<div className='w-[250px]'>
+						<Filters />
+					</div>
+
+					{/* List of Items */}
+					<div className='flex-1'>
+						<div className='flex flex-col gap-16'>
+							List of Items
+						</div>
+					</div>
+				</div>
+			</Container>
 		</>
 	);
 }
