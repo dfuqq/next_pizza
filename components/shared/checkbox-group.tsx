@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { cn } from '@/lib/utils';
 import { FilterCheckbox, FilterCheckboxProps } from './filter-checkbox';
 import { Input } from '../ui';
 
@@ -42,7 +41,7 @@ export const CheckboxGroup: React.FC<Props> = ({
 	};
 
 	return (
-		<div className={cn('', className)}>
+		<div className={className}>
 			<p className='font-bold mb-3'>{title}</p>
 
 			{showAll && (

@@ -1,5 +1,4 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
 import { CheckboxGroup, FilterCheckbox, Title } from '../shared';
 import { Input, RangeSlider } from '../ui';
 
@@ -9,7 +8,7 @@ interface Props {
 
 export const Filters: React.FC<Props> = ({ className }) => {
 	return (
-		<div className={cn('', className)}>
+		<div className={className}>
 			<Title
 				text='Фильтрация'
 				size='sm'
