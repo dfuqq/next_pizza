@@ -2,19 +2,21 @@
 
 import React, { useState } from 'react';
 import { FilterCheckbox, FilterCheckboxProps } from './filter-checkbox';
-import { Input } from '../ui';
+import { Input, Skeleton } from '../ui';
 
 type Item = FilterCheckboxProps;
 
 interface Props {
 	title: string;
 	items: Item[];
-	defaultItems: Item[];
+	defaultItems?: Item[];
+	loading?: boolean;
 	limit?: number;
 	searchInputPlaceholder?: string;
-	onChange?: (values: string[]) => void;
-	defaultValue?: string[];
+	onClickCheckbox?: (id: string) => void;
+	selectedValues?: Set<string>;
 	className?: string;
+	name?: string;
 }
 
 export const CheckboxGroup: React.FC<Props> = ({
@@ -22,10 +24,12 @@ export const CheckboxGroup: React.FC<Props> = ({
 	items,
 	defaultItems,
 	limit = 5,
+	loading,
 	searchInputPlaceholder = 'Поиск',
 	className,
-	onChange,
-	defaultValue,
+	onClickCheckbox,
+	selectedValues,
+	name,
 }) => {
 	const [showAll, setShowAll] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
@@ -34,16 +38,33 @@ export const CheckboxGroup: React.FC<Props> = ({
 		? items.filter((item) =>
 				item.text.toLowerCase().includes(searchValue.toLowerCase())
 		  )
-		: defaultItems.slice(0, limit);
+		: (defaultItems || items).slice(0, limit);
 
 	const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(e.target.value);
 	};
 
+	if (loading)
+		return (
+			<div className={className}>
+				<p className='font-bold mb-3'>{title}</p>
+				{...Array(limit)
+					.fill(0)
+					.map((_, index) => (
+						<Skeleton
+							key={index}
+							className='h-6 mb-4 rounded-[8px]'
+						/>
+					))}
+				<Skeleton className='w-28 h-6 mb-4 rounded-[8px]' />
+			</div>
+		);
+
 	return (
 		<div className={className}>
 			<p className='font-bold mb-3'>{title}</p>
 
+			{/* TODO: Анимация при раскрытии */}
 			{showAll && (
 				<div className='mb-5'>
 					<Input
@@ -57,12 +78,13 @@ export const CheckboxGroup: React.FC<Props> = ({
 			<div className='flex flex-col gap-4 max-h-96 pr-2 overflow-auto scrollbar'>
 				{list.map((item, index) => (
 					<FilterCheckbox
-						onCheckedChange={(ids) => console.log(ids)}
-						checked={false}
+						onCheckedChange={() => onClickCheckbox?.(item.value)}
+						checked={selectedValues?.has(item.value)}
 						key={index}
 						value={item.value}
 						text={item.text}
 						endAdornment={item.endAdornment}
+						name={name}
 					/>
 				))}
 			</div>
