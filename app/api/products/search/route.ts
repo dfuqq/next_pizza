@@ -13,7 +13,6 @@ export async function GET(req: NextRequest) {
 						contains:
 							query[0].toLocaleLowerCase() +
 							query.slice(1, query.length),
-						mode: 'insensitive',
 					},
 				},
 				{
@@ -21,11 +20,11 @@ export async function GET(req: NextRequest) {
 						contains:
 							query[0].toLocaleUpperCase() +
 							query.slice(1, query.length),
-						mode: 'insensitive',
 					},
 				},
 			],
 		},
+		take: 5,
 	});
 
 	return NextResponse.json(products);
