@@ -8,19 +8,18 @@ import { Button } from '../ui';
 interface Props {
 	name: string;
 	imageUrl: string;
-	onClickAdd?: VoidFunction;
+	price: number;
+	onSubmit?: VoidFunction;
 	className?: string;
 }
 
 export const ChooseProductForm: React.FC<Props> = ({
 	name,
 	imageUrl,
-	onClickAdd,
+	price,
+	onSubmit,
 	className,
 }) => {
-	const textDetails = '30 см, традиционное тесто  30';
-	const totalPrice = 350;
-
 	return (
 		<div className={cn('flex flex-1', className)}>
 			<div className='flex items-center justify-center flex-1 relative w-full'>
@@ -38,10 +37,10 @@ export const ChooseProductForm: React.FC<Props> = ({
 					className='font-extrabold mb-1'
 				/>
 
-				<p className='text-gray-400'>{textDetails}</p>
-
-				<Button className='h-[55px] px-10 text-base rounded-[18px] w-full mt-10'>
-					Добавить за {totalPrice}₽
+				<Button
+					onClick={onSubmit}
+					className='h-[55px] px-10 text-base rounded-[18px] w-full mt-10'>
+					Добавить за {price}₽
 				</Button>
 			</div>
 		</div>
