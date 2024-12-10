@@ -60,7 +60,9 @@ export async function POST(req: NextRequest) {
 			where: {
 				cartId: userCart.id,
 				productVariantId: data.productVariantId,
-				addons: { every: { id: { in: data.addons } } },
+				// FIXME: увеличивать quantity одинаковых товаров при добавлении.
+				// Баг призмы, every не может в строгое точное сравнение, костылить
+				addons: { every: { id: { in: data.addons } }, some: {} },
 			},
 		});
 
@@ -73,16 +75,16 @@ export async function POST(req: NextRequest) {
 					quantity: findCartItem.quantity + 1,
 				},
 			});
+		} else {
+			await prisma.cartItem.create({
+				data: {
+					cartId: userCart.id,
+					productVariantId: data.productVariantId,
+					quantity: 1,
+					addons: { connect: data.addons?.map((id) => ({ id })) },
+				},
+			});
 		}
-
-		await prisma.cartItem.create({
-			data: {
-				cartId: userCart.id,
-				productVariantId: data.productVariantId,
-				quantity: 1,
-				addons: { connect: data.addons?.map((id) => ({ id })) },
-			},
-		});
 
 		const updatedUserCart = await updateCartTotalCost(token);
 
