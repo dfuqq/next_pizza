@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useSet } from 'react-use';
 import { useSearchParams } from 'next/navigation';
 
@@ -65,14 +65,17 @@ export const useFilters = (): ReturnProps => {
 		}));
 	};
 
-	return {
-		selectedIngredients,
-		sizes,
-		pizzaDoughTypes,
-		prices,
-		setPrices: updatePrices,
-		setPizzaDoughTypes: togglePizzaDoughTypes,
-		setSizes: toggleSizes,
-		setSelectedIngredients: toggleIngredients,
-	};
+	return useMemo(
+		() => ({
+			selectedIngredients,
+			sizes,
+			pizzaDoughTypes,
+			prices,
+			setPrices: updatePrices,
+			setPizzaDoughTypes: togglePizzaDoughTypes,
+			setSizes: toggleSizes,
+			setSelectedIngredients: toggleIngredients,
+		}),
+		[selectedIngredients, sizes, pizzaDoughTypes, prices]
+	);
 };

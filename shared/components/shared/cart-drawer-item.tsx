@@ -39,7 +39,7 @@ export const CartDrawerItem: React.FC<Props> = ({
 				<div className='flex items-center justify-between'>
 					<CountButton
 						onClick={onClickCountButton}
-						value={quantity}
+						quantity={quantity}
 					/>
 
 					<div className='flex items-center gap-3'>

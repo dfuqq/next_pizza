@@ -25,12 +25,5 @@ export const useQueryFilters = (filters: FiltersProps) => {
 		}
 
 		isMounted.current = true;
-	}, [
-		// FIXME: бесконечные запросы при простом filters
-		filters.prices,
-		filters.pizzaDoughTypes,
-		filters.selectedIngredients,
-		filters.sizes,
-		router,
-	]);
+	}, [filters]);
 };

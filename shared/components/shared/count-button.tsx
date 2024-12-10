@@ -4,7 +4,7 @@ import { cn } from '@/shared/lib/utils';
 import { CountIconButton } from '.';
 
 export interface CountButtonProps {
-	value?: number;
+	quantity?: number;
 	size?: 'sm' | 'lg';
 	onClick?: (type: 'plus' | 'minus') => void;
 	className?: string;
@@ -13,7 +13,7 @@ export interface CountButtonProps {
 export const CountButton: React.FC<CountButtonProps> = ({
 	className,
 	onClick,
-	value = 1,
+	quantity = 1,
 	size = 'sm',
 }) => {
 	return (
@@ -24,12 +24,12 @@ export const CountButton: React.FC<CountButtonProps> = ({
 			)}>
 			<CountIconButton
 				onClick={() => onClick?.('minus')}
-				disabled={value === 1}
+				disabled={quantity === 1}
 				size={size}
 				type='minus'
 			/>
 
-			<b className={size === 'sm' ? 'text-sm' : 'text-md'}>{value}</b>
+			<b className={size === 'sm' ? 'text-sm' : 'text-md'}>{quantity}</b>
 
 			<CountIconButton
 				onClick={() => onClick?.('plus')}

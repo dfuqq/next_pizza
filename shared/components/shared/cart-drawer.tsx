@@ -2,6 +2,7 @@
 
 import React, { PropsWithChildren, useEffect } from 'react';
 
+import { useShallow } from 'zustand/react/shallow';
 import { useCartStore } from '@/shared/store';
 import { getCartItemDetails } from '@/shared/lib';
 import { PizzaDoughType, PizzaSize } from '@/shared/consts/pizza';
@@ -29,36 +30,22 @@ export const CartDrawer: React.FC<PropsWithChildren<Props>> = ({
 	children,
 	className,
 }) => {
-	// const [
-	// 	totalCost,
-	// 	fetchCartItems,
-	// 	updateItemQuantity,
-	// 	removeCartItem,
-	// 	items,
-	// ] = useCartStore((state) => [
-	// 	state.totalCost,
-	// 	state.fetchCartItems,
-	// 	state.updateItemQuantity,
-	// 	state.removeCartItem,
-	// 	state.items,
-	// ]);
-	// FIXME: Не работает деструктуризация с zustand
-	const cartState = useCartStore.getState();
 	const [
 		totalCost,
 		fetchCartItems,
 		updateItemQuantity,
 		removeCartItem,
 		items,
-	] = [
-		cartState.totalCost,
-		cartState.fetchCartItems,
-		cartState.updateItemQuantity,
-		cartState.removeCartItem,
-		cartState.items,
-	];
+	] = useCartStore(
+		useShallow((state) => [
+			state.totalCost,
+			state.fetchCartItems,
+			state.updateItemQuantity,
+			state.removeCartItem,
+			state.items,
+		])
+	);
 
-	// FIXME: не всегда рендерится корзина, дебажить
 	useEffect(() => {
 		fetchCartItems();
 	}, []);
@@ -68,7 +55,7 @@ export const CartDrawer: React.FC<PropsWithChildren<Props>> = ({
 		quantity: number,
 		type: 'plus' | 'minus'
 	) => {
-		const newQuantity = type === 'plus' ? quantity++ : quantity--;
+		const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
 		updateItemQuantity(id, newQuantity);
 	};
 

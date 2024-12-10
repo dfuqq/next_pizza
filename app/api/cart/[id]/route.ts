@@ -2,6 +2,7 @@ import { prisma } from '@/prisma/prisma-client';
 import { updateCartTotalCost } from '@/shared/lib';
 import { NextRequest, NextResponse } from 'next/server';
 
+// FIXME: PATCH срабатывает 200, но quantity не меняется
 export async function PATCH(
 	req: NextRequest,
 	{ params }: { params: Promise<{ id: string }> }
