@@ -56,6 +56,12 @@ const config: Config = {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)',
 			},
+			keyframes: {
+				side: {
+					'0%, 50%, 100%': { transform: 'translateX(0px)' },
+					'25%, 75%': { transform: 'translateX(-10px)' },
+				},
+			},
 		},
 	},
 	plugins: [require('tailwindcss-animate')],
