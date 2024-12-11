@@ -4,8 +4,8 @@ import { CartStateItem } from './get-cart-details';
 
 export const getCartItemDetails = (
 	addons: CartStateItem['addons'],
-	pizzaDoughType: PizzaDoughType,
-	pizzaSize: PizzaSize
+	pizzaDoughType?: PizzaDoughType,
+	pizzaSize?: PizzaSize
 ): string => {
 	const details = [];
 

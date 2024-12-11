@@ -1,10 +1,9 @@
 'use client';
 
-import React, { PropsWithChildren, useEffect } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import { cn } from '@/shared/lib/utils';
 
-import { useShallow } from 'zustand/react/shallow';
-import { useCartStore } from '@/shared/store';
+import { useCart } from '@/shared/hooks';
 import { getCartItemDetails } from '@/shared/lib';
 import { PizzaDoughType, PizzaSize } from '@/shared/consts/pizza';
 
@@ -17,7 +16,7 @@ import {
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
-} from '@/shared/components/ui/sheet';
+} from '@/shared/components//';
 import Link from 'next/link';
 import { Button } from '../ui';
 
@@ -25,32 +24,9 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 import { CartDrawerItem, Title } from '.';
 
-interface Props {
-	className?: string;
-}
-
-export const CartDrawer: React.FC<PropsWithChildren<Props>> = ({
-	children,
-}) => {
-	const [
-		totalCost,
-		fetchCartItems,
-		updateItemQuantity,
-		removeCartItem,
-		items,
-	] = useCartStore(
-		useShallow((state) => [
-			state.totalCost,
-			state.fetchCartItems,
-			state.updateItemQuantity,
-			state.removeCartItem,
-			state.items,
-		])
-	);
-
-	useEffect(() => {
-		fetchCartItems();
-	}, []);
+export const CartDrawer: React.FC<PropsWithChildren> = ({ children }) => {
+	const { totalCost, items, updateItemQuantity, removeCartItem } = useCart();
+	const [redirecting, setRedirecting] = useState(false);
 
 	const onClickCountButton = (
 		id: number,
@@ -119,16 +95,11 @@ export const CartDrawer: React.FC<PropsWithChildren<Props>> = ({
 										<CartDrawerItem
 											id={item.id}
 											imageUrl={item.imageUrl}
-											details={
-												item.pizzaSize &&
-												item.pizzaDoughType
-													? getCartItemDetails(
-															item.addons,
-															item.pizzaDoughType as PizzaDoughType,
-															item.pizzaSize as PizzaSize
-													  )
-													: ''
-											}
+											details={getCartItemDetails(
+												item.addons,
+												item.pizzaDoughType as PizzaDoughType,
+												item.pizzaSize as PizzaSize
+											)}
 											disabled={item.disabled}
 											name={item.name}
 											price={item.price}
@@ -160,10 +131,15 @@ export const CartDrawer: React.FC<PropsWithChildren<Props>> = ({
 											{totalCost}₽
 										</span>
 									</div>
-									<Link href='/cart'>
+									<Link href='/checkout'>
 										<Button
 											type='submit'
-											className='w-full h-12 text-base'>
+											loading={redirecting}
+											className='w-full h-12 text-base'
+											onClick={() =>
+												setRedirecting(true)
+											}>
+											Оформить заказ
 											<ArrowRight className='w-5 ml-2' />
 										</Button>
 									</Link>

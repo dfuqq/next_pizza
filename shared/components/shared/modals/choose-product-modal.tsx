@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 import { ExtendedProduct } from '@/@types/prisma';
 
-import { Dialog, DialogContent } from '@/shared/components/ui/dialog';
+import { Dialog, DialogContent } from '@/shared/components//';
 
 import { ProductForm } from '..';
 
