@@ -16,7 +16,7 @@ import {
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
-} from '@/shared/components//';
+} from '@/shared/components/';
 import Link from 'next/link';
 import { Button } from '../ui';
 
