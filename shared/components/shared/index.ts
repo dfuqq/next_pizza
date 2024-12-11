@@ -1,4 +1,5 @@
 export * from './checkout';
+export * from './email-templates';
 export * from './form-components';
 export * from './modals';
 // TODO: унести импорты в папки

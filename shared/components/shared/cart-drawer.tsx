@@ -1,7 +1,7 @@
 'use client';
 
 import React, { PropsWithChildren, useState } from 'react';
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@/shared/lib/';
 
 import { useCart } from '@/shared/hooks';
 import { getCartItemDetails } from '@/shared/lib';

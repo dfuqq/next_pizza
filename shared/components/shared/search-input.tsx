@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@/shared/lib/';
 import { useClickAway, useDebounce } from 'react-use';
 import { Api } from '@/shared/services/api-client';
 

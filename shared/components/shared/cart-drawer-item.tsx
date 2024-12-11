@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@/shared/lib/';
 
 import { CartItemProps } from './cart-item-details/cart-item-details.types';
 

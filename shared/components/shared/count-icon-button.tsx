@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@/shared/lib/';
 
 import { Minus, Plus } from 'lucide-react';
 import { CountButtonProps } from './count-button';
