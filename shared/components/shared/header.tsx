@@ -4,13 +4,12 @@ import React, { useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { cn } from '@/shared/lib/';
 
+import { useSession, signIn } from 'next-auth/react';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 import Image from 'next/image';
-import { User } from 'lucide-react';
 
-import { Button } from '../ui';
-import { Container, CartButton, SearchInput } from '../shared';
+import { Container, CartButton, SearchInput, ProfileButton } from '../shared';
 
 interface Props {
 	hasSearch?: boolean;
@@ -64,13 +63,7 @@ export const Header: React.FC<Props> = ({
 
 				{/* Right Side */}
 				<div className='flex items-center gap-3'>
-					<Button
-						variant='outline'
-						className='flex items-center gap-1'>
-						<User size={16} />
-						Войти
-					</Button>
-
+					<ProfileButton />
 					{hasCart && <CartButton />}
 				</div>
 			</Container>
