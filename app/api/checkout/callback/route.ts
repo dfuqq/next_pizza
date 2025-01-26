@@ -44,6 +44,7 @@ export async function POST(req: NextRequest) {
 				'Next Pizza | Ваш заказ успешно оформлен!',
 				OrderSuccessTemplate({ orderId: order.id, cartItems })
 			);
+			return NextResponse.json(200);
 		}
 		// TODO: Письмо с orderfailure
 		// else {}
