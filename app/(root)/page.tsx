@@ -1,5 +1,3 @@
-import { prisma } from '@/prisma/prisma-client';
-
 import {
 	Container,
 	Filters,
@@ -7,7 +5,7 @@ import {
 	Title,
 	TopBar,
 } from '@/shared/components/';
-import { findPizzas, GetSearchParams } from '@/shared/lib/find-pizzas';
+import { findPizzas, GetSearchParams } from '@/shared/lib';
 import { Suspense } from 'react';
 
 export default async function Home({
