@@ -2,6 +2,7 @@ import {
 	Container,
 	Filters,
 	ProductsGroupList,
+	Stories,
 	Title,
 	TopBar,
 } from '@/shared/components/';
@@ -24,6 +25,8 @@ export default async function Home({
 					className='font-extrabold'
 				/>
 			</Container>
+
+			<Stories />
 
 			<TopBar
 				categories={categories.filter(
