@@ -1,15 +1,20 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '@/shared/lib/';
 
-import { useSession, signIn } from 'next-auth/react';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { Container, CartButton, SearchInput, ProfileButton } from '../shared';
+import {
+	Container,
+	CartButton,
+	SearchInput,
+	ProfileButton,
+	AuthModal,
+} from '../shared';
 
 interface Props {
 	hasSearch?: boolean;
@@ -22,12 +27,26 @@ export const Header: React.FC<Props> = ({
 	hasCart = true,
 	className,
 }) => {
+	const router = useRouter();
+	const [openAuthModal, setOpenAuthModal] = useState(false);
+
 	const searchParams = useSearchParams();
 
 	useEffect(() => {
+		let toastMessage = '';
+
 		if (searchParams.has('paid')) {
+			toastMessage = 'Заказ оплачен — детали на почте 📝';
+		}
+
+		if (searchParams.has('verified')) {
+			toastMessage = 'Аккаунт подтверждён - ожидаем заказ 😋';
+		}
+
+		if (toastMessage) {
 			setTimeout(() => {
-				toast.success('Заказ оплачен — детали на почте');
+				router.replace('/');
+				toast.success(toastMessage, { duration: 2000 });
 			}, 1000);
 		}
 	}, []);
@@ -63,7 +82,13 @@ export const Header: React.FC<Props> = ({
 
 				{/* Right Side */}
 				<div className='flex items-center gap-3'>
-					<ProfileButton />
+					<AuthModal
+						open={openAuthModal}
+						onClose={() => setOpenAuthModal(false)}
+					/>
+					<ProfileButton
+						onClickSignIn={() => setOpenAuthModal(true)}
+					/>
 					{hasCart && <CartButton />}
 				</div>
 			</Container>
