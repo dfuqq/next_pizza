@@ -13,8 +13,11 @@ export interface GetSearchParams {
 const DEFAULT_MIN_PRICE = 0;
 const DEFAULT_MAX_PRICE = 1000;
 
-// FIXME: `searchParams` should be awaited before using its properties.
-export const findPizzas = async (params: GetSearchParams) => {
+export const findPizzas = async (
+	searchParams: Promise<{ searchParams: GetSearchParams }>
+) => {
+	const params = (await searchParams) as GetSearchParams;
+
 	const pizzaSizes = params.pizzaSizes?.split(',').map(Number);
 	const pizzaDoughTypes = params.pizzaDoughTypes?.split(',').map(Number);
 	const ingredientsIdArr = params.ingredients?.split(',').map(Number);

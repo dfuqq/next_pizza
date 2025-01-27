@@ -11,7 +11,8 @@ interface Props {
 export const CheckoutAddressInput: React.FC<Props> = ({ onChange }) => {
 	return (
 		<AddressSuggestions
-			token={String(process.env.DADATA_API_TOKEN)}
+			// Fuck this token, not working with .env, stupid ass
+			token='ce956b95519fb2b12bdc7f2722347ec727bd4dcf'
 			onChange={(data) => onChange?.(data?.value)}
 		/>
 	);

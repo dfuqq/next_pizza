@@ -4,4 +4,4 @@ import { authOptions } from '@/shared/consts/auth-options';
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST, authOptions };
+export { handler as GET, handler as POST };

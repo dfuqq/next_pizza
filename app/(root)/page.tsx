@@ -1,3 +1,4 @@
+import { PageProps } from '@/.next/types/app/(root)/page';
 import {
 	Container,
 	Filters,
@@ -6,15 +7,12 @@ import {
 	Title,
 	TopBar,
 } from '@/shared/components/';
-import { findPizzas, GetSearchParams } from '@/shared/lib';
+import { findPizzas } from '@/shared/lib';
 import { Suspense } from 'react';
 
-export default async function Home({
-	searchParams,
-}: {
-	searchParams: GetSearchParams;
-}) {
-	const categories = await findPizzas(searchParams);
+// TODO: prebuild
+export default async function Home({ searchParams }: PageProps) {
+	const categories = await findPizzas(await searchParams);
 
 	return (
 		<>

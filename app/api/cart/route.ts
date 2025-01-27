@@ -76,6 +76,7 @@ export async function POST(req: NextRequest) {
 				},
 			});
 		} else {
+			// FIXME: Добавленные допы не влияют на стоимость в корзине
 			await prisma.cartItem.create({
 				data: {
 					cartId: userCart.id,

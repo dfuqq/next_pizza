@@ -15,7 +15,6 @@ export const ProfileButton: React.FC<Props> = ({
 	className,
 }) => {
 	const { data: session } = useSession();
-	console.log(session);
 
 	return (
 		<div className={cn('', className)}>
